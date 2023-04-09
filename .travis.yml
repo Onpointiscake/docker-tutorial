@@ -7,3 +7,15 @@ before_install:
 
 script:
   - docker run -e CI=true derunderyerm/docker-tutorial npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk 
+  region: "eu-west-3"
+  app: "docker-tutorial"
+  env: "Dockertutorial-env"
+  bucket_name: "elasticbeanstalk-eu-west-3-140789153668"
+  bucket_path: "docker-tutorial"
+  on:
+    branch: main
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
